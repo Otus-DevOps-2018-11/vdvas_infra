@@ -21,7 +21,7 @@ Host someinternalhost
 После этого подключение будет работать в одну строку.
      
 ```     
-     Agent pid 15596
+Agent pid 15596
 Identity added: .ssh/GCP/appuser (appuser)
 
 Äìèòðèé@DESKTOP-D3E66QS MINGW64 ~
