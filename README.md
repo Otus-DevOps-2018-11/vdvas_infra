@@ -2,7 +2,7 @@
 vdvas Infra repository
 Подключение в одну строку к someinternalhost
 ```
-        ssh someinternalhost
+ssh someinternalhost
 ```
 Я использую под Windows git ssh клиент Git Bash
 Настроить MINGW64 на автозапуск ssh-agent
