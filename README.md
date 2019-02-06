@@ -1,11 +1,11 @@
 # vdvas_infra
 vdvas Infra repository  
-Подключение в одну строку к someinternalhost
+Подключение в одну строку к someinternalhost командой
 ```
 ssh someinternalhost
 ```
-Я использую под Windows git ssh клиент Git Bash  
-Настроить MINGW64 на автозапуск ssh-agent
+Я использую под Windows git ssh клиент Git Bash.  
+Настроить MINGW64 на автозапуск ssh-agent при запуске клиента.
 ```
     eval $(ssh-agent -s)
     ssh-add ~/.ssh/GCP/appuser
