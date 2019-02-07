@@ -16,7 +16,7 @@ ssh someinternalhost
     ssh-add ~/.ssh/GCP/appuser
 ```
 
-В папке пользователя в папке .ssh создать файл config
+В папке пользователя в папке .ssh создать файл config:
 ```
 Host someinternalhost
          HostName 10.132.0.3
