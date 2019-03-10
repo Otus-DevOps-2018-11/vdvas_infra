@@ -1,7 +1,10 @@
 #Homework 5
 
 Config description:
-testapp_IP = 35.204.7.238 testapp_port = 9292
+```
+testapp_IP = 35.204.7.238
+testapp_port = 9292
+```
 
 Скрипты , находящиеся в репозитории.
 - install_ruby.sh - установка ruby
