@@ -2,6 +2,10 @@
 cloud-bastion
 vdvas Infra repository
 
+Homework Terraform-1
+Создал файл для развертывания вм с установкой приложения. Добавил переменные.
+
+
 Homework 3 OVPN
 ```
 bastion_IP = 35.195.200.220
