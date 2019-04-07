@@ -1,0 +1,27 @@
+---
+- name: Install Mongod
+  hosts: all
+  become: true
+  tasks:
+  - name: Add key apt
+    apt_key:
+      keyserver: keyserver.ubuntu.com
+      id: EA312927
+
+  - name: add repo
+    apt_repository:
+      filename: mongodb-org-3.2.list
+      repo: deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse 
+      state: present
+
+  - name: update repo and install mongod
+    apt:
+      name: mongodb-org
+      update_cache: yes
+      state: present
+
+  - name: enable puma
+    systemd: name=puma enabled=yes
+
+
+
