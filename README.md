@@ -23,8 +23,8 @@ someinternalhost_IP = 10.132.0.3
 
 Config description:
 ```
-testapp_IP = 35.204.78.199
-testapp_port = 9292
+testapp_IP=35.204.78.199
+testapp_port=9292
 ```
 
 Скрипты , находящиеся в репозитории.
