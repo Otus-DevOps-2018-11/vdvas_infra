@@ -2,7 +2,7 @@
 
 Config description:
 ```
-testapp_IP = 35.204.7.238
+testapp_IP = 35.204.78.199
 testapp_port = 9292
 ```
 
