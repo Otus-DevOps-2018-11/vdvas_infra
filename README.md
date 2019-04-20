@@ -3,7 +3,7 @@
 
 Config description:
 ```
-testapp_IP=35.204.78.199
+testapp_IP=35.204.33.101
 testapp_port=9292
 ```
 
