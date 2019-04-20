@@ -1,3 +1,33 @@
+#Homework 6
+Packer-base
+
+Был скачал packer с оцифиального сайта.
+Предоставлен доступ к gcloud.
+`$ gcloud auth application-default login`
+Был создан шаблон ubuntu16.json
+В шаблон были добавлены провижинеры для установки приложений.
+Проверка корректности шаблона
+`$ packer validate ./ubuntu16.json`
+Запуск билда образа
+`$ packer build ubuntu16.json`
+Создадим ВМ из созданного образа и подключися к вм
+`$ ssh appuser@<instace_public_ip>`
+Установим приложение, используя следующие команды
+```
+$ git clone -b monolith https://github.com/express42/reddit.git
+$ cd reddit && bundle install
+$ puma -d
+```
+Вынесем пеерменные в отдельный файл variables.
+Отредактируем шаблон, внеся переменные.
+
+Команда для создания вм из образа
+```
+gcloud compute instances create reddit-from-image1 \
+--image reddit-base-1552944958 \
+--image-family reddit-full \
+--restart-on-failure \
+```
 
 #Homework 5
 
