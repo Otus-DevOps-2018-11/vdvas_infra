@@ -15,7 +15,7 @@ testapp_port=9292
 
 Команда для создания инстанса и запуска скрипта по установке ruby, mongod и запуску puma.
 ```
-gcloud compute instances create reddit-app10 \
+gcloud compute instances create reddit-app \
 --boot-disk-size=10GB \
 --image-family ubuntu-1604-lts \
 --image-project=ubuntu-os-cloud \
