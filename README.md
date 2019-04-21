@@ -63,6 +63,8 @@ gcloud compute firewall-rules create allow-9292-tcp-in --allow=TCP:9292
 ```
 
 
+
+
 Homework 3 OVPN
 ```
 bastion_IP = 35.195.200.220
