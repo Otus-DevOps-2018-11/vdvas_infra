@@ -9,9 +9,9 @@
             "zone": "europe-west1-b",
             "ssh_username": "appuser",
             "machine_type": "f1-micro",
-			"image_description": "reddit-terraform2",
-			"disk_size": "10",
-			"disk_type": "pd-standard"
+            "image_description": "reddit-terraform2",
+            "disk_size": "10",
+            "disk_type": "pd-standard"
         }
     ],
     "provisioners": [
