@@ -1,6 +1,95 @@
-# vdvas_infra
-cloud-bastion
-vdvas Infra repository
+#Homework 8
+Terraform-2
+
+
+#Homework 7  
+Terraform-1  
+  
+Удалим ключ appuser из метаданных в GCP  
+Скачаем terraform, создадим пустой конфиг, добавим файлы в .gitignore.  
+Добавим секцию провайдера в конфигурационный файл и инициализируем терраформ. `$ terraform init`  
+В main.tf добавим ресурскоторый описывает ВМ.  
+Посмотрим запланированные изменения командой `$ terraform plan `  
+Применяем main.tf командой `$ terraform apply `  
+В процессе применения конфига создается файл состояния terraform.tfstate  
+Используя команду terraform show найдем ip адрес созданного инстанса `$ terraform show | grep assigned_nat_ip`  
+По ssh к созданной ВМ не подключиться, так как мы удалили ключи из метаданных.  
+Определим SSH ключ в main.tf  
+Применим изменения - подключение заработало!  
+Создадим файл outputs.tf который будет содержать выходные переменные. Например ip адрес инстанса.  
+Посмотрим значения переемнных командой `$ terraform output `  
+Добавим правило фаервола и тэг инстанса в main.tf  
+Опишем провижинеры для деплоя приложения на ВМ. Применим изменения.  
+Определим входные переменные при помощи variables.tf. Отредактируем main.tf  
+Удалим все ресурсы `$ terraform destroy ` и создадим заново `$ terraform plan` `$ terraform apply`  
+
+
+#Homework 6  
+Packer-base  
+
+Был скачал packer с оцифиального сайта.  
+Предоставлен доступ к gcloud.  
+`$ gcloud auth application-default login`  
+Был создан шаблон ubuntu16.json  
+В шаблон были добавлены провижинеры для установки приложений.  
+Проверка корректности шаблона  
+`$ packer validate ./ubuntu16.json`  
+Запуск билда образа  
+`$ packer build ubuntu16.json`  
+Создадим ВМ из созданного образа и подключися к вм  
+`$ ssh appuser@<instace_public_ip>`  
+Установим приложение, используя следующие команды  
+```
+$ git clone -b monolith https://github.com/express42/reddit.git
+$ cd reddit && bundle install
+$ puma -d
+```
+Вынесем пеерменные в отдельный файл variables.  
+Отредактируем шаблон, внеся переменные.  
+
+Команда для создания вм из образа  
+```
+gcloud compute instances create reddit-from-image1 \
+--image reddit-base-1552944958 \
+--image-family reddit-full \
+--restart-on-failure \
+```
+
+#Homework 5
+
+Config description:
+```
+testapp_IP=35.204.33.101
+testapp_port=9292
+```
+
+Скрипты , находящиеся в репозитории.
+- install_ruby.sh - установка ruby
+- install_mongodb.sh - установка mongodb
+- deploy.sh - установка зависимостей.
+- install.sh - объединенные 3 скрипта выше в одну команду для указания gcloud как аргумент ключа metadata-from-file.
+
+Команда для создания инстанса и запуска скрипта по установке ruby, mongod и запуску puma.
+```
+gcloud compute instances create reddit-app \
+--boot-disk-size=10GB \
+--image-family ubuntu-1604-lts \
+--image-project=ubuntu-os-cloud \
+--machine-type=g1-small \
+--tags puma-server  \
+--zone europe-west4-a  \
+--restart-on-failure \
+--metadata-from-file startup-script=install.sh
+```
+
+
+Команда gcloud, которая создает правило брандмауэра, разрешающее соединения на порт 9292 по протоколу TCP.
+```
+gcloud compute firewall-rules create allow-9292-tcp-in --allow=TCP:9292
+```
+
+
+
 
 Homework 3 OVPN
 ```
@@ -75,4 +164,5 @@ appuser@someinternalhost:~$ ip address
        valid_lft forever preferred_lft forever
 appuser@someinternalhost:~$
 ```
+
 
