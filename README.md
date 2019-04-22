@@ -1,6 +1,67 @@
-# vdvas_infra
-cloud-bastion
-vdvas Infra repository
+#Homework 6
+Packer-base
+
+Был скачал packer с оцифиального сайта.  
+Предоставлен доступ к gcloud.  
+`$ gcloud auth application-default login`  
+Был создан шаблон ubuntu16.json  
+В шаблон были добавлены провижинеры для установки приложений.  
+Проверка корректности шаблона  
+`$ packer validate ./ubuntu16.json`  
+Запуск билда образа  
+`$ packer build ubuntu16.json`  
+Создадим ВМ из созданного образа и подключися к вм  
+`$ ssh appuser@<instace_public_ip>`  
+Установим приложение, используя следующие команды  
+```
+$ git clone -b monolith https://github.com/express42/reddit.git
+$ cd reddit && bundle install
+$ puma -d
+```
+Вынесем пеерменные в отдельный файл variables.  
+Отредактируем шаблон, внеся переменные.  
+
+Команда для создания вм из образа  
+```
+gcloud compute instances create reddit-from-image1 \
+--image reddit-base-1552944958 \
+--image-family reddit-full \
+--restart-on-failure \
+```
+
+#Homework 5
+
+Config description:
+```
+testapp_IP=35.204.33.101
+testapp_port=9292
+```
+
+Скрипты , находящиеся в репозитории.
+- install_ruby.sh - установка ruby
+- install_mongodb.sh - установка mongodb
+- deploy.sh - установка зависимостей.
+- install.sh - объединенные 3 скрипта выше в одну команду для указания gcloud как аргумент ключа metadata-from-file.
+
+Команда для создания инстанса и запуска скрипта по установке ruby, mongod и запуску puma.
+```
+gcloud compute instances create reddit-app \
+--boot-disk-size=10GB \
+--image-family ubuntu-1604-lts \
+--image-project=ubuntu-os-cloud \
+--machine-type=g1-small \
+--tags puma-server  \
+--zone europe-west4-a  \
+--restart-on-failure \
+--metadata-from-file startup-script=install.sh
+```
+
+
+Команда gcloud, которая создает правило брандмауэра, разрешающее соединения на порт 9292 по протоколу TCP.
+```
+gcloud compute firewall-rules create allow-9292-tcp-in --allow=TCP:9292
+```
+
 
 Homework 3 OVPN
 ```
@@ -75,4 +136,7 @@ appuser@someinternalhost:~$ ip address
        valid_lft forever preferred_lft forever
 appuser@someinternalhost:~$
 ```
+
+
+
 
