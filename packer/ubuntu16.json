@@ -9,7 +9,7 @@
             "zone": "europe-west1-b",
             "ssh_username": "appuser",
             "machine_type": "f1-micro",
-			"image_description": "ruby+reddit"
+            "image_description": "ruby+reddit"
         }
     ],
     "provisioners": [

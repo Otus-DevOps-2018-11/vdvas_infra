@@ -1,3 +1,4 @@
+
 #Homework 8  
 Terraform-2  
   
@@ -20,6 +21,7 @@ Terraform-2
 Создадим stage и prod.  
 Перенесем все модули в директории stage & prod.  
 Воспользуемся модулем storage-bucket для создания бакета в сервисе Storage.  
+
 
 
 #Homework 7  
@@ -184,5 +186,6 @@ appuser@someinternalhost:~$ ip address
        valid_lft forever preferred_lft forever
 appuser@someinternalhost:~$
 ```
+
 
 

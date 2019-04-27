@@ -9,10 +9,10 @@
             "zone": "europe-west1-b",
             "ssh_username": "appuser",
             "machine_type": "f1-micro",
-			"image_description": "ruby+reddit",
-			"disk_size": "10",
-			"disk_type": "pd-standard",
-			"tags": "puma"
+			      "image_description": "ruby+reddit",
+			      "disk_size": "10",
+			      "disk_type": "pd-standard",
+			      "tags": "puma"
         }
     ],
     "provisioners": [
