@@ -8,12 +8,11 @@
             "source_image_family": "ubuntu-1604-lts",
             "zone": "europe-west1-b",
             "ssh_username": "appuser",
-            "machine_type": "f1-micro"
-			"image_description": "ruby+reddit"
-			"disk_size": "10"
-			"disk_type": "pd-standard"
-			"tags": "puma"
-			"network": "us-central1"
+            "machine_type": "f1-micro",
+			      "image_description": "ruby+reddit",
+			      "disk_size": "10",
+			      "disk_type": "pd-standard",
+			      "tags": "puma"
         }
     ],
     "provisioners": [
@@ -29,7 +28,7 @@
         },
 		{
             "type": "shell",
-            "script": "files/run_puma",
+            "script": "files/run_puma.sh",
             "execute_command": "sudo {{.Path}}"
         }
     ]
