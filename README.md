@@ -1,3 +1,22 @@
+#Homework 9  
+Ansible-1  
+Создадим инвентори файл ansible/inventory  
+`appserver ansible_host=35.195.186.154 ansible_user=appuser ansible_private_key_file=~/.ssh/appuser`  
+Используем команду ansible для вызова модуля ping из командной строки.  
+`ansible appserver -i ./inventory -m ping`  
+Повторите такую же процедуру для инстанса БД.  
+Определим некоторые параметры в файле ansible.cfg.  
+Теперь мы можем удалить избыточную информацию из файла inventory.  
+Выполним команду uptime `ansible dbserver -m command -a uptime`  
+Определим группы хостов в инвентори файле.  
+Создадим файл inventory.yml и перенесем в него записи из имеющегося inventory.  
+Используем модуль shell для проверки установки необходимых пакетов.  
+`ansible app -m shell -a 'ruby -v; bundler -v'`  
+Используем модуль systemd для проверки работы службы mongo.  
+`ansible db -m systemd -a name=mongod`  
+Сравним выполнение скачивания репозитория гита при помощи модуля git и command. Сравним вывод команд.  
+СОздадим плейбук ansible/clone.yml и выполним его `ansible-playbook clone.yml`  
+
 
 #Homework 8  
 Terraform-2  
