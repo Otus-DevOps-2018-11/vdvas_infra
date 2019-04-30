@@ -33,7 +33,7 @@ gcloud compute firewall-rules create allow-9292-tcp-in --allow=TCP:9292
 
 Homework 3 OVPN
 ```
-bastion_IP = 35.195.200.220
+bastion_IP = 34.76.208.192
 someinternalhost_IP = 10.132.0.3
 ```
 
@@ -43,7 +43,7 @@ Homework 3 Bastion host and SSH
 vdvas Infra repository  
 
 ```
-bastion_IP = 35.195.200.220
+bastion_IP = 34.76.208.192
 someinternalhost_IP = 10.132.0.3
 ```
 
