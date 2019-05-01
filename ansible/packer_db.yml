@@ -5,7 +5,7 @@
   tasks:
   - name: Add key apt
     apt_key:
-      keyserver: keyserver.ubuntu.com
+      keyserver: hkp://keyserver.ubuntu.com:80
       id: EA312927
 
   - name: add repo
@@ -20,8 +20,10 @@
       update_cache: yes
       state: present
 
-  - name: enable puma
-    systemd: name=puma enabled=yes
+  - name: enable mongod
+    systemd: 
+      name: mongod
+      enabled: yes
 
 
 
