@@ -1,0 +1,23 @@
+- name: Deploy APP
+  hosts: app
+  become: true
+  tasks:
+    - name: Fetch the latest version of application code
+      git:
+        repo: 'https://github.com/express42/reddit.git'
+        dest: /home/appuser/reddit
+        version: monolith # <-- Óêàçûâàåì íóæíóþ âåòêó
+      notify: reload puma
+    - name: Bundle install
+      bundler:
+        state: present
+        chdir: /home/appuser/reddit # <-- Â êàêîé äèðåêòîðèè âûïîëíèòü êîìàíäó bundle
+
+
+
+  handlers: # <-- Ð”Ð¾Ð±Ð°Ð²Ð¸Ð¼ Ð±Ð»Ð¾Ðº handlers Ð¸ Ð·Ð°Ð´Ð°Ñ‡Ñƒ
+  - name: restart mongod
+    service: name=mongod state=restarted
+  - name: reload puma
+    systemd: name=puma state=restarted
+
