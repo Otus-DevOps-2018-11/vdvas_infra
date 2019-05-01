@@ -1,6 +1,5 @@
 {
-    "builders": [
-        {
+    "builders": [{
             "type": "googlecompute",
             "project_id": "infra-227618",
             "image_name": "reddit-app-{{timestamp}}",
@@ -13,13 +12,10 @@
             "disk_size": "10",
             "disk_type": "pd-standard",
             "tags": "puma"
-		}
-    ],
-    "provisioners": [
-        {
+    }],
+    "provisioners": [{
             "type": "shell",
             "script": "scripts/install_ruby.sh",
             "execute_command": "sudo {{.Path}}"
-        }
-    ]
+    }]
 }
