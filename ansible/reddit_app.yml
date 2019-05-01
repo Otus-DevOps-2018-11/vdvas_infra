@@ -1,0 +1,63 @@
+---
+- name: Configure hosts & deploy application
+  hosts: all
+  vars:
+    mongo_bind_ip: 0.0.0.0
+    db_host: 10.132.0.36
+  tasks:
+    - name: Change mongo config file
+      become: true # <-- Р’С‹РїРѕР»РЅРёС‚СЊ Р·Р°РґР°РЅРёРµ РѕС‚ root
+      template:
+        src: templates/mongod.conf.j2 # <-- РџСѓС‚СЊ РґРѕ Р»РѕРєР°Р»СЊРЅРѕРіРѕ С„Р°Р№Р»Р°-С€Р°Р±Р»РѕРЅР°
+        dest: /etc/mongod.conf # <-- РџСѓС‚СЊ РЅР° СѓРґР°Р»РµРЅРЅРѕРј С…РѕСЃС‚Рµ
+        mode: 0644 # <-- РџСЂР°РІР° РЅР° С„Р°Р№Р», РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ
+      tags: db-tag
+      notify: restart mongod
+
+    - name: Add unit file for Puma
+      become: true
+      copy:
+        src: files/puma.service
+        dest: /etc/systemd/system/puma.service
+      tags: app-tag
+      notify: reload puma
+
+    - name: enable puma
+      become: true
+      systemd: name=puma enabled=yes
+      tags: app-tag
+      
+    - name: Add config for DB connection
+      template:
+        src: templates/db_config.j2
+        dest: /home/appuser/db_config
+      tags: app-tag
+
+    - name: enable puma
+      become: true
+      systemd: name=puma enabled=yes
+      tags: app-tag
+
+    - name: Fetch the latest version of application code
+      git:
+        repo: 'https://github.com/express42/reddit.git'
+        dest: /home/appuser/reddit
+        version: monolith # <-- Указываем нужную ветку
+      tags: deploy-tag
+      notify: reload puma
+    - name: Bundle install
+      bundler:
+        state: present
+        chdir: /home/appuser/reddit # <-- В какой директории выполнить команду bundle
+      tags: deploy-tag
+
+
+
+  handlers: # <-- Р”РѕР±Р°РІРёРј Р±Р»РѕРє handlers Рё Р·Р°РґР°С‡Сѓ
+  - name: restart mongod
+    become: true
+    service: name=mongod state=restarted
+  - name: reload puma
+    become: true
+    systemd: name=puma state=restarted
+

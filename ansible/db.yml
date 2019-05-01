@@ -1,0 +1,20 @@
+---
+- name: Configure MongoDB
+  hosts: db
+  become: true  
+  vars:
+    mongo_bind_ip: 0.0.0.0
+  tasks:
+    - name: Change mongo config file
+      template:
+        src: templates/mongod.conf.j2 # <-- РџСѓС‚СЊ РґРѕ Р»РѕРєР°Р»СЊРЅРѕРіРѕ С„Р°Р№Р»Р°-С€Р°Р±Р»РѕРЅР°
+        dest: /etc/mongod.conf # <-- РџСѓС‚СЊ РЅР° СѓРґР°Р»РµРЅРЅРѕРј С…РѕСЃС‚Рµ
+        mode: 0644 # <-- РџСЂР°РІР° РЅР° С„Р°Р№Р», РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅРѕ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ
+      notify: restart mongod
+
+  handlers: # <-- Р”РѕР±Р°РІРёРј Р±Р»РѕРє handlers Рё Р·Р°РґР°С‡Сѓ
+  - name: restart mongod
+    become: true
+    service: name=mongod state=restarted
+
+
